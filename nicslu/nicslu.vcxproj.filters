@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nics_config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nicslu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nicslu_default.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nicslu_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="thread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="timer_c.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nicslu_util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="nicslu_aegraph.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_amd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_analyze.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_check.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_cond.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_destroy.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_dumpa.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_dumplu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_etree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_flops.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_global.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_initialize.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_internal.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_kernel.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_kernel_fact.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_kernel_fact_parallel.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_kernel_parallel.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_matrix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_mc64.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_mc64scale.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_memuse.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_mergedup.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_refact.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_refact_parallel.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_refine.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_residual.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_scale.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_scheduler.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_solve.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_sort.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_static_symbolic.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_thread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_thread_proc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_throughput.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_transpose.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="system.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="thread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="timer_c.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nicslu_readfile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\thesis\nicslu paper\_nicslu301\_nicslu\demo\ASIC_100k.mtx" />
+  </ItemGroup>
+</Project>
