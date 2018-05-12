@@ -8,8 +8,6 @@ int main(void)
 {
 	int ret;
 	uint__t n, nnz, i;
-	//printf("%d\n",sizeof(uint__t));
-	//while (1);
 	real__t *ax;
 	uint__t *ai, *ap;
 	SNicsLU *nicslu;
