@@ -21,7 +21,8 @@ int main(void)
 	nicslu = (SNicsLU *)malloc(sizeof(SNicsLU));
 	NicsLU_Initialize(nicslu);
 
-	ret = NicsLU_ReadTripletColumnToSparse("ASIC_100k.mtx", &n, &nnz, &ax, &ai, &ap);
+	//ret = NicsLU_ReadTripletColumnToSparse("ASIC_100k.mtx", &n, &nnz, &ax, &ai, &ap);
+	ret = NicsLU_ReadTripletColumnToSparse("m1.mtx", &n, &nnz, &ax, &ai, &ap);
 	if (ret != NICS_OK) goto EXIT;
 
 	x = (real__t *)malloc(sizeof(real__t)*(n + n));

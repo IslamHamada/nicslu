@@ -35,7 +35,7 @@ int NicsLU_Analyze(SNicsLU *nicslu)
 	uint__t j;
 	real__t t, *u, *v;
 
-	real__t *rs, *csi;
+	real__t *rowScale, *csi;
 	uint__t *cpi;
 	uint__t i;
 	uint__t *p1, *p2, *p3, *p4;
@@ -75,12 +75,12 @@ int NicsLU_Analyze(SNicsLU *nicslu)
 	p2 = nicslu->row_perm_inv;
 	p3 = nicslu->col_perm;
 	p4 = nicslu->col_perm_inv;
-	rs = nicslu->row_scale;
+	rowScale = nicslu->row_scale;
 	csi = nicslu->col_scale_perm;
 	for (i=0; i<n; ++i)
 	{
 		p1[i] = p2[i] = p3[i] = p4[i] = i;
-		rs[i] = csi[i] = 1.;
+		rowScale[i] = csi[i] = 1.;
 	}
 
 	/**************************************************************************************/
@@ -156,12 +156,21 @@ int NicsLU_Analyze(SNicsLU *nicslu)
 
 	/**************************************************************************************/
 	/*amd*/
+
+	//i/s cp0,ci0 CSC format after reordering with static pivoting(but can be not sorted)
 	cp0 = NULL;
 	ci0 = NULL;
+	//
+
+	//i/s rp,ri CSR format after reordering with static pivoting (but sorted) (they are used just for sorting)
 	rp = NULL;
 	ri = NULL;
+	//
+
+	//i/s cp,ci if(sorted) it's CSC if(not sorted) it's CSR
 	cp = NULL;
 	ci = NULL;
+	//
 
 	err = _I_NicsLU_Check(nicslu);
 
@@ -194,8 +203,10 @@ int NicsLU_Analyze(SNicsLU *nicslu)
 		return NICSLU_MEMORY_OVERFLOW;
 	}
 
+	//i/s it construcs CSC not CSR
 	_I_NicsLU_ConstructCSR(nicslu, match, ci0, cp0);
 
+	//i/s will not need this condition because it's already sorted
 	if (NICSLU_MATRIX_NOT_SORTED == err)/*need sort*/
 	{
 		size = sizeof(uint__t)*nnz;
@@ -236,10 +247,15 @@ int NicsLU_Analyze(SNicsLU *nicslu)
 		ci = ci0;
 		cp = cp0;
 	}
+	//
 
 	/*a+a'*/
 	size = sizeof(int__t)*n;
+
+	//i/s the nonzeros of each row (exclu diag)
 	len = (int__t *)malloc(size);
+	//
+
 	if (NULL == len)
 	{
 		free(ci);
@@ -321,14 +337,14 @@ int NicsLU_Analyze(SNicsLU *nicslu)
 	u = dw;/*col*/
 	v = u + n;/*row*/
 
-	rs = nicslu->row_scale;
+	rowScale = nicslu->row_scale;
 	csi = nicslu->col_scale_perm;
 	cpi = nicslu->col_perm_inv;
 
 	for (j=0; j<n; ++j)
 	{
 		t = exp(v[j]);
-		rs[j] = t;
+		rowScale[j] = t;
 
 		t = exp(u[j]);
 		csi[cpi[j]] = t;

@@ -117,9 +117,9 @@ uint__t _I_NicsLU_AAT(uint__t n, uint__t *ai, uint__t *ap, int__t *len, int__t *
 				}
 			}
 			tp[j] = pj;
-		}/*end scanning row k*/
+		}//i/s not accurate comment /*end scanning row k*/
 		tp[k] = p;
-	}/*end scanning all rows*/
+	}//i/s not accurate comment /*end scanning all rows*/
 
 	for (j=0; j<n; ++j)
 	{
@@ -237,7 +237,9 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 	nv = work+n;
 	head = nv+n;
 	elen = head+n;
+	//i/s degree is len
 	degree = elen+n;
+	//
 	w = degree+n;
 
 
@@ -316,6 +318,9 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 		inext = next[me];
 		if (inext != -1) last[inext] = -1;
 		head[deg] = inext;
+
+		//i/s i understand till here
+		//
 
 		/*me represents the elimination of pivots nel to nel+nv[me]-1
 		place me itself as the first in this set*/

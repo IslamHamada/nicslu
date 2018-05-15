@@ -65,7 +65,10 @@ int _I_NicsLU_Check(SNicsLU *nicslu)
 			{
 				return NICSLU_MATRIX_ENTRY_DUPLICATED;
 			}
-			if (j < (uint__t)jlast)
+			//i/s error because jlast is negative and it typecasts it to (uint_t) ???
+			//if (j < (uint__t)jlast)
+			if(jlast!=-1&& j < (uint__t)jlast)
+			//
 			{
 				err = NICSLU_MATRIX_NOT_SORTED;
 			}
