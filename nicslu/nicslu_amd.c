@@ -213,7 +213,7 @@ void _I_NicsLU_AAT2(uint__t n, uint__t *ai, uint__t *ap, int__t *len, int__t *pe
 	}
 }
 
-void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw, \
+void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *ai, \
 	int__t *len, int__t *work, int__t *last, int__t *next, real__t alpha, int__t aggr, \
 	size_t *lu_nnz)
 {
@@ -319,8 +319,6 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 		if (inext != -1) last[inext] = -1;
 		head[deg] = inext;
 
-		//i/s i understand till here
-		//
 
 		/*me represents the elimination of pivots nel to nel+nv[me]-1
 		place me itself as the first in this set*/
@@ -344,14 +342,14 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 			pme3 = pme1+len[me];
 			for (p=pme1; p<pme3; ++p)
 			{
-				i = iw[p];
+				i = ai[p];
 				nvi = nv[i];
 				if (nvi > 0)
 				{
 					/*store i in new list*/
 					degme += nvi;
 					nv[i] = -nvi;
-					iw[++pme2] = i;
+					ai[++pme2] = i;
 
 					/*remove variable i from degree list*/
 					ilast = last[i];
@@ -382,7 +380,7 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 				else
 				{
 					/*search the elements in me*/
-					e = iw[p++];
+					e = ai[p++];
 					pj = pe[e];
 					ln = len[e];
 				}
@@ -391,7 +389,7 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 
 				for (knt2=1; knt2<=ln; ++knt2)
 				{
-					i = iw[pj++];
+					i = ai[pj++];
 					nvi = nv[i];
 
 					if (nvi > 0)
@@ -415,8 +413,8 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 								pn = pe[j];
 								if (pn >= 0)
 								{
-									pe[j] = iw[pn];
-									iw[pn] = AMD_FLIP(j);
+									pe[j] = ai[pn];
+									ai[pn] = AMD_FLIP(j);
 								}
 							}
 
@@ -427,15 +425,15 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 							while (psrc <= pend)
 							{
 								/*search the next fliped entry*/
-								j = AMD_FLIP(iw[psrc++]);
+								j = AMD_FLIP(ai[psrc++]);
 								if (j >= 0)
 								{
-									iw[pdst] = pe[j];
+									ai[pdst] = pe[j];
 									pe[j] = pdst++;
 									lenj = len[j];
 									for (knt3=0; knt3<lenj-1; ++knt3)
 									{
-										iw[pdst++] = iw[psrc++];
+										ai[pdst++] = ai[psrc++];
 									}
 								}
 							}
@@ -444,7 +442,7 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 							p1 = pdst;
 							for (psrc=pme1; psrc<pfree; ++psrc)
 							{
-								iw[pdst++] = iw[psrc];
+								ai[pdst++] = ai[psrc];
 							}
 							pme1 = p1;
 							pfree = pdst;
@@ -456,7 +454,7 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 						store i in new list*/
 						degme += nvi;
 						nv[i] = -nvi;
-						iw[pfree++] = i;
+						ai[pfree++] = i;
 
 						/*remove variable i from degree link list*/
 
@@ -488,7 +486,7 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 		/*find set differences*/
 		for (pme=pme1; pme<=pme2; ++pme)
 		{
-			i = iw[pme];
+			i = ai[pme];
 			eln = elen[i];
 			if (eln > 0)
 			{
@@ -497,7 +495,7 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 				pend2 = pe[i]+eln;
 				for (p=pe[i]; p<pend2; ++p)
 				{
-					e = iw[p];
+					e = ai[p];
 					we = w[e];
 					if (we >= wflg)
 					{
@@ -515,7 +513,7 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 		/*update degree*/
 		for (pme=pme1; pme<=pme2; ++pme)
 		{
-			i = iw[pme];
+			i = ai[pme];
 			p1 = pe[i];
 			p2 = p1+elen[i]-1;
 			pn = p1;
@@ -526,7 +524,7 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 			{
 				for (p=p1; p<=p2; ++p)
 				{
-					e = iw[p];
+					e = ai[p];
 					we = w[e];
 					if (we != 0)
 					{
@@ -534,7 +532,7 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 						if (dext > 0)
 						{
 							deg += dext;
-							iw[pn++] = e;
+							ai[pn++] = e;
 							hash += e;
 						}
 						else
@@ -549,13 +547,13 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 			{
 				for (p=p1; p<=p2; ++p)
 				{
-					e = iw[p];
+					e = ai[p];
 					we = w[e];
 					if (we != 0)
 					{
 						dext = we-wflg;
 						deg += dext;
-						iw[pn++] = e;
+						ai[pn++] = e;
 						hash += e;
 					}
 				}
@@ -569,12 +567,12 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 			p4 = p1+len[i];
 			for (p=p2+1; p<p4; ++p)
 			{
-				j = iw[p];
+				j = ai[p];
 				nvj = nv[j];
 				if (nvj > 0)
 				{
 					deg += nvj;
-					iw[pn++] = j;
+					ai[pn++] = j;
 					hash += j;
 				}
 			}
@@ -595,9 +593,9 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 				degree[i] = MIN(degree[i], deg);
 
 				/*add me to the list for i*/
-				iw[pn] = iw[p3];
-				iw[p3] = iw[p1];
-				iw[p1] = me;
+				ai[pn] = ai[p3];
+				ai[p3] = ai[p1];
+				ai[p1] = me;
 				len[i] = pn-p1+1;
 
 				hash = hash % (uint__t)n;
@@ -625,7 +623,7 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 		/*supervariable detection*/
 		for (pme=pme1; pme<=pme2; ++pme)
 		{
-			i = iw[pme];
+			i = ai[pme];
 			if (nv[i] < 0)
 			{
 				hash = last[i];
@@ -653,7 +651,7 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 					pend2 = pe[i]+ln;
 					for (p=pe[i]+1; p<pend2; ++p)
 					{
-						w[iw[p]] = wflg;
+						w[ai[p]] = wflg;
 					}
 
 					jlast = i;
@@ -665,7 +663,7 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 						pend2 = pe[j]+ln;
 						for (p=pe[j]+1; ok && p<pend2; ++p)
 						{
-							if (w[iw[p]] != wflg) ok = 0;
+							if (w[ai[p]] != wflg) ok = 0;
 						}
 						if (ok)
 						{
@@ -695,7 +693,7 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 		nleft = n-nel;
 		for (pme=pme1; pme<=pme2; ++pme)
 		{
-			i = iw[pme];
+			i = ai[pme];
 			nvi = -nv[i];
 			if (nvi > 0)
 			{
@@ -712,7 +710,7 @@ void _I_NicsLU_AMD(int__t n, int__t pfree, int__t iwlen, int__t *pe, int__t *iw,
 				mindeg = MIN(mindeg, deg);
 				degree[i] = deg;
 
-				iw[p++] = i;
+				ai[p++] = i;
 			}
 		}
 

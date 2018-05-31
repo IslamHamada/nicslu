@@ -119,6 +119,7 @@ int NicsLU_Factorize(SNicsLU *nicslu)
 	/* x     flag  pend  stack appos */
 	x = (real__t *)(nicslu->workspace);
 	flag = (int__t *)(x + n);
+	//i/s pend helps with pruning
 	pend = flag + n;
 	stack = pend + n;
 	appos = stack + n;

@@ -32,7 +32,10 @@ int NicsLU_Initialize(SNicsLU *nicslu)
 	nicslu->cfgf = (real__t *)malloc(sizeof(real__t)*32);
 	memset(nicslu->cfgi, 0, sizeof(uint__t)*32);
 	memset(nicslu->cfgf, 0, sizeof(real__t)*32);
+	//i/s
 	nicslu->cfgi[0] = 0;/*row/column mode*/
+	//nicslu->cfgi[0] = 1;/*row/column mode*/
+	//
 	nicslu->cfgi[1] = 1;/*mc64*/
 	nicslu->cfgi[2] = 0;/*scale*/
 	nicslu->cfgi[3] = NICSLU_PIPELINE_THRESHOLD;

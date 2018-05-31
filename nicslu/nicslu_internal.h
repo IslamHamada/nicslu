@@ -4,7 +4,7 @@
 #include "nicslu.h"
 #include "thread.h"
 
-#define OK(code)						((code) >= NICS_OK)
+#define NICSLU_OK(code)						((code) >= NICS_OK)
 #define FAIL(code)						((code) < NICS_OK)
 #define WARNING(code)					((code) > NICS_OK)
 

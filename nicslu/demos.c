@@ -4,7 +4,7 @@
 #include "nicslu.h"
 #include "nicslu_util.h"
 
-int demop(int argc, char *argv[])
+int demos(void)
 {
 	int ret;
 	uint__t n, nnz, i;
@@ -12,13 +12,6 @@ int demop(int argc, char *argv[])
 	uint__t *ai, *ap;
 	SNicsLU *nicslu;
 	real__t *x, *b, err;
-	
-	if (argc == 1)
-	{
-		printf("usage: demop <#threads>\n");
-		return -1;
-	}
-	
 	ax = NULL;
 	ai = NULL;
 	ap = NULL;
@@ -41,19 +34,10 @@ int demop(int argc, char *argv[])
 	NicsLU_Analyze(nicslu);
 	printf("analysis time: %.8g\n", nicslu->stat[0]);
 
-	ret = NicsLU_CreateScheduler(nicslu);
-	printf("time of creating scheduler: %.8g\n", nicslu->stat[4]);
-	printf("suggestion: %s.\n", ret==0?"parallel":"sequential");
-
-	NicsLU_CreateThreads(nicslu, atoi(argv[1]), TRUE);
-	printf("total cores: %d, threads created: %d\n", (int)(nicslu->stat[9]), (int)(nicslu->cfgi[5]));
-
-	NicsLU_BindThreads(nicslu, FALSE);
-
-	NicsLU_Factorize_MT(nicslu);
+	NicsLU_Factorize(nicslu);
 	printf("factorization time: %.8g\n", nicslu->stat[1]);
 
-	NicsLU_ReFactorize_MT(nicslu, ax);
+	NicsLU_ReFactorize(nicslu, ax);
 	printf("re-factorization time: %.8g\n", nicslu->stat[2]);
 
 	NicsLU_Solve(nicslu, x);

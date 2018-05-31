@@ -12,6 +12,8 @@ int__t _I_NicsLU_Symbolic(uint__t n, uint__t k, \
 	int__t *pinv, int__t *stack, int__t *flag, int__t *pend, int__t *appos, \
 	uint__t *uindex, uint__t *ulen, void *lu, size_t *up, uint__t *aidx, uint__t arownnz)
 {
+	//i/s pend variable helps with pruning
+
 	int__t top;
 	uint__t i, col, j, jnew;
 	int__t head, pos;

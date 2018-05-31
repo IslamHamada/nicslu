@@ -164,6 +164,12 @@
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="demop.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demos.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="D:\thesis\nicslu paper\_nicslu301\_nicslu\demo\ASIC_100k.mtx" />

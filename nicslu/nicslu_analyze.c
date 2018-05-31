@@ -29,7 +29,7 @@ int NicsLU_Analyze(SNicsLU *nicslu)
 	uint__t *ci;
 	int__t *len;
 	uint__t nzaat;
-	int__t *pe, *sp, *iw, *tp;
+	int__t *pe, *sp, *aatai, *tp;
 	int__t *p, *pinv;
 
 	uint__t j;
@@ -290,11 +290,13 @@ int NicsLU_Analyze(SNicsLU *nicslu)
 
 	pe = w;
 	sp = w+n;
-	iw = w+6*n;
+	//i/s (a+at)ai
+	aatai = w+6*n;
+	//
 	tp = w+5*n;
 
 	/*construct A+A'*/
-	_I_NicsLU_AAT2(n, ci, cp, len, pe, sp, iw, tp);
+	_I_NicsLU_AAT2(n, ci, cp, len, pe, sp, aatai, tp);
 
 	free(ci);
 	free(cp);
@@ -311,7 +313,7 @@ int NicsLU_Analyze(SNicsLU *nicslu)
 	}
 	pinv = p + n;
 
-	_I_NicsLU_AMD(n, nzaat, n+nzaat+nzaat/5, pe, iw, len, w, p, pinv, \
+	_I_NicsLU_AMD(n, nzaat, n+nzaat+nzaat/5, pe, aatai, len, w, p, pinv, \
 		nicslu->cfgf[2], nicslu->cfgi[6], &(nicslu->lu_nnz_est));
 	if (nicslu->lu_nnz_est < (size_t)nnz) nicslu->lu_nnz_est = nnz;
 
@@ -327,7 +329,7 @@ int NicsLU_Analyze(SNicsLU *nicslu)
 	printf("lu  %u\n", nicslu->lu_nnz_est);
 #endif
 
-	_I_NicsLU_Permute(nicslu, match, p, pinv);
+	//_I_NicsLU_Permute(nicslu, match, p, pinv);
 
 	free(match);
 	free(p);
@@ -344,7 +346,7 @@ int NicsLU_Analyze(SNicsLU *nicslu)
 	for (j=0; j<n; ++j)
 	{
 		t = exp(v[j]);
-		rowScale[j] = t;
+ 		rowScale[j] = t;
 
 		t = exp(u[j]);
 		csi[cpi[j]] = t;

@@ -30,6 +30,8 @@
     <ClInclude Include="timer_c.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="demop.c" />
+    <ClCompile Include="demos.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="nicslu_aegraph.c" />
     <ClCompile Include="nicslu_amd.c" />
